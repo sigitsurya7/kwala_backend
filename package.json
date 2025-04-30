@@ -1,0 +1,23 @@
+{
+  "name": "kwala",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon main.js",
+    "dev": "nodemon main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@fastify/mysql": "^5.0.2",
+    "dotenv": "^16.5.0",
+    "fastify": "^5.3.2",
+    "fastify-plugin": "^5.0.1",
+    "kysely": "^0.28.2",
+    "nodemon": "^3.1.10"
+  }
+}
