@@ -7,5 +7,4 @@ app.listen({ port: PORT }, (err, address) => {
     app.log.error(err)
     process.exit(1)
   }
-//   app.log.info(`Server listening at ${address}`)
 })

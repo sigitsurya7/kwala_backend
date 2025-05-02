@@ -2,7 +2,7 @@ import { getPaginationParams } from "./pagination.js"
 
 function buildJoinClause(build){
     return build.map(join => {
-        const joinType = join.type === 'LEFT' ? 'LEFT JOIN' : 'JOIN';
+        const joinType = join.type === 'LEFT' ? 'LEFT JOIN' : join.type === 'INNER' ? 'INNER JOIN' : 'JOIN';
         return `${joinType} ${join.table} ON ${join.on}`;
     }).join('\n')
 }
@@ -64,7 +64,11 @@ export const updateQb = async (db, { table, data, where }) => {
     const setClause = Object.keys(data).map(key => `${key} = ?`).join(', ')
     const values = Object.values(data)
     const sql = `UPDATE ${table} SET ${setClause} WHERE ${where}`
-    const response = await db.query(sql, values)
+    const [response] = await db.query(sql, values)
+    
+    if (response.affectedRows === 0) {
+        throw new Error('NO_ROWS_AFFECTED')
+    }
 
     return response
 }
